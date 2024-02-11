@@ -1,2 +1,0 @@
-# ClonEslandBnjmn
-Astro proyect
