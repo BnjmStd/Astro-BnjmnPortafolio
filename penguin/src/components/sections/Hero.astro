@@ -1,0 +1,76 @@
+---
+import { basics } from '@cv';
+import Section from '@/components/Section.astro';
+
+const { 
+    name,
+    label,
+    image,
+    location,
+    profiles,
+    phone,
+    email
+} = basics;
+
+const { 
+    city, 
+    region 
+} = location
+
+
+---
+
+<Section title = "">
+    <div class="container">  
+        <div class="info">
+            <h1> {name} </h1>
+            <h2> {label} </h2>
+            <span>
+                {city}, {region}
+            </span>
+            <footer>
+                {
+                    email && (
+                        <a
+                            class="img-mail"
+                            href={`mailto: ${email}`}
+                            title={`Enviar un correo electrónico a ${name} al correo ${email}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >     
+                        </a>
+                    )
+                }
+                {
+                    phone && (
+                        <a
+                            href={`tel: ${phone}`}
+                            title={`Llamar a ${name} al número ${phone}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >     
+                        </a>
+                    )
+                }
+            </footer >
+        </div>
+        <figure>
+            <img src={image} alt="name">
+        </figure>
+    </div>
+</Section>
+
+<style>
+    .container {
+
+    }
+
+    .info {
+
+    }
+    .img-mail {
+        background-image: url(../../icons/mail.png);
+        width: 100px; /* ajusta el ancho según tus necesidades */
+        height: 100px; /* ajusta la altura según tus necesidades */
+    }
+</style>
