@@ -2,6 +2,12 @@
 import { basics } from '@cv';
 import Section from '@/components/Section.astro';
 
+
+/* Icons  */
+import PhoneIcons from '@/icons/phone.astro';
+import MailIcons from '@/icons/mail.astro';
+import Git from '@/icons/github.astro'
+
 const { 
     name,
     label,
@@ -17,10 +23,17 @@ const {
     region 
 } = location
 
+const SocialIcons: Record<string, any> = {
+    Git
+}
+
+
+const printInfo = [email, phone].filter(Boolean).join("&bull;");
+
 
 ---
 
-<Section title = "">
+<Section >
     <div class="container">  
         <div class="info">
             <h1> {name} </h1>
@@ -29,6 +42,9 @@ const {
                 {city}, {region}
             </span>
             <footer>
+                <div class="print">
+                    {printInfo}
+                </div>
                 {
                     email && (
                         <a
@@ -37,8 +53,10 @@ const {
                             title={`Enviar un correo electrónico a ${name} al correo ${email}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                        >     
+                        > 
+                        <MailIcons />
                         </a>
+                        
                     )
                 }
                 {
@@ -48,9 +66,25 @@ const {
                             title={`Llamar a ${name} al número ${phone}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                        >     
+                        > 
+                        <PhoneIcons />    
                         </a>
                     )
+                }
+                {
+                    profiles.map(({ network, url, username }) => {
+                        const Icon = SocialIcons[network];
+                        return (
+                            <a
+                                href={url};
+                                title={`visitar el perfil de ${name} en ${network}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <Icon />
+                            </a>
+                        )
+                    })
                 }
             </footer >
         </div>
@@ -61,16 +95,73 @@ const {
 </Section>
 
 <style>
-    .container {
 
+    .container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
     }
 
     .info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding-right: 32px;
+    }
 
+    h1 {
+        font-size: 2rem;
     }
-    .img-mail {
-        background-image: url(../../icons/mail.png);
-        width: 100px; /* ajusta el ancho según tus necesidades */
-        height: 100px; /* ajusta la altura según tus necesidades */
+
+    h2 {
+        color: #444;
+        font-weight: 500;
+        font-size: 1.1rem;
+        text-wrap: balance;
     }
+
+    img {
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        width: 128px;
+        border-radius: 16px;
+    }
+
+    span {
+        color: #666;
+        display: flex;
+        align-items: center;
+        gap: .25rem;
+        font-size: .85rem;
+        letter-spacing: -0.05rem;
+    }
+
+    footer {
+        display: flex;
+        gap: 4px;
+        margin-top: 8px;
+    }
+
+    footer a {
+        color: #777;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #eee;
+        padding: 4px;
+        height: 32px;
+        width: 32px;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: all .3s ease;
+    }
+
+    footer a:hover {
+        background: #eee;
+        border: 1px solid #333;
+    }
+
+
 </style>

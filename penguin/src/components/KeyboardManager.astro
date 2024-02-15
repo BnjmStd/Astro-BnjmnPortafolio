@@ -1,0 +1,61 @@
+---
+
+---
+
+<footer>
+Pulsa <kbd>cmd</kbd> + <kbd>7</kbd> para ver las opciones.
+
+</footer>
+
+
+<ninja-keys placeholder="Buscar Comando: " hideBreadcrumbs>
+
+</ninja-keys>
+
+<script>
+    import "ninja-keys";
+
+
+    const ninja = document.querySelector("ninja-keys");
+
+    if (ninja !== null) {
+        ninja.data = [
+            {
+                id: "proyects",
+                title: "Open Proyects",
+                hotkey: "ctrl+P" ,
+                icon: "apps",
+                section: "Proyects",
+                handler: () => {
+                    window.print();
+                },
+            },
+        ]
+    }
+</script>
+
+<style>
+    @media print {
+        ninja-keys {
+            display: none;
+        }
+    }
+
+    footer {
+        background: #fdfdfd;
+        border-top: 1px solid #eee;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        padding-block: 16px;
+        text-align: center;
+    }
+
+    kbd {
+        background: #eee;
+        border-radius: 4px;
+        padding: 2px 4px;
+        font-size: 12px;
+        font-family: monospace;
+    }
+</style>
