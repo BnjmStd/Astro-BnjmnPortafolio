@@ -1,10 +1,10 @@
 ---
-
+import PrintIcon from '@/icons/print.astro';
 ---
 
 <footer>
-Pulsa <kbd>cmd</kbd> + <kbd>7</kbd> para ver las opciones.
-
+    Pulsa <kbd>cmd</kbd> + <kbd>k</kbd> para ver las opciones.
+    <PrintIcon /> 
 </footer>
 
 
@@ -14,6 +14,7 @@ Pulsa <kbd>cmd</kbd> + <kbd>7</kbd> para ver las opciones.
 
 <script>
     import "ninja-keys";
+import Print from "@/icons/print.astro";
 
 
     const ninja = document.querySelector("ninja-keys");
@@ -22,9 +23,8 @@ Pulsa <kbd>cmd</kbd> + <kbd>7</kbd> para ver las opciones.
         ninja.data = [
             {
                 id: "proyects",
-                title: "Open Proyects",
+                title: "Imprimir <PrintIcon />" ,
                 hotkey: "ctrl+P" ,
-                icon: "apps",
                 section: "Proyects",
                 handler: () => {
                     window.print();
@@ -37,6 +37,10 @@ Pulsa <kbd>cmd</kbd> + <kbd>7</kbd> para ver las opciones.
 <style>
     @media print {
         ninja-keys {
+            display: none;
+        }
+
+        footer {
             display: none;
         }
     }
@@ -56,6 +60,6 @@ Pulsa <kbd>cmd</kbd> + <kbd>7</kbd> para ver las opciones.
         border-radius: 4px;
         padding: 2px 4px;
         font-size: 12px;
-        font-family: monospace;
+        font-family: cursive;
     }
 </style>
